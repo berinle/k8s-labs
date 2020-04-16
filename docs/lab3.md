@@ -1,5 +1,5 @@
 # Marketplace and Services 
-No application lives in isolation. This works you through how to connect your application to a backing service.
+No application lives in isolation. This lab walks you through how to connect your application to a backing service.
 
 ## Additional pre-reqs to complete this lab:
 * [Helm 3+](https://helm.sh/docs/intro/install/)
