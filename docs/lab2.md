@@ -1,8 +1,4 @@
-# Deploying your first application
-
-## Requirements
-* A running kubernetes cluster. You could use [minikube](https://minikube.sigs.k8s.io/docs/start/)
-* [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl)
+# Scaling, Logs and HA
 
 ## What you will learn
 * How to scale your apps
@@ -22,6 +18,7 @@ deployment.apps/articulate created
 ```
 
 2. Get the objects created as part of the deployment
+
 ```
 kubectl get all
 
@@ -39,6 +36,7 @@ replicaset.apps/articulate-5466968447   1         1         1       19s
 Notice a pod was automatically created as part of the deployment. Also notice there is a `ReplicaSet` associated with the deployment. This will be used to scale up/down the deployment as instructed.
 
 2. Scale to 3 copies of your application
+
 ```
 kubectl scale deployments/articulate --replicas=3
 
@@ -47,6 +45,7 @@ deployment.apps/articulate scaled
 ```
 
 3. Check the deployment rollout of the scale out
+
 ```
 kubectl rollout status deployments/articulate
 
@@ -58,6 +57,7 @@ deployment "articulate" successfully rolled out
 ```
 
 4. Get the deployment
+
 ```
 kubectl get deployments/articulate
 
@@ -67,6 +67,7 @@ articulate   3/3     3            3           5m17s
 ```
 
 5. Verify there are 3 pods now up and running
+
 ```
 kubectl get pods -l app=articulate
 
@@ -83,6 +84,7 @@ articulate-5466968447-lq9th   1/1     Running   0          3m49sm
 ## View application logs
 
 1. Check the logs of one of the pods from the previous steps
+
 ```
 kubectl logs pods/articulate-5466968447-5hjbp
 
@@ -118,6 +120,7 @@ Calculated JVM Memory Configuration: -XX:MaxDirectMemorySize=10M -XX:MaxMetaspac
 With 3 copies of the app running, lets trigger a failure on one of them and watch it self heal
 
 1. First expose the service so we can 
+
 ```
 kubectl expose deployment/articulate --type=NodePort --name=articulate --port=8080
 
@@ -126,6 +129,7 @@ service/articulate exposed
 ```
 
 2. Get the dynamically assigned port by listing the service
+
 ```
 kubectl get service/articulate
 
@@ -133,7 +137,9 @@ kubectl get service/articulate
 NAME         TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
 articulate   NodePort   10.100.200.110   <none>        8080:32068/TCP   4s
 ```
+
 3. In a terminal window, watch the pods
+
 ```
 kubectl get po -w -l app=articulate
 
@@ -143,6 +149,7 @@ articulate-5466968447-5hjbp   1/1     Running   0          70m
 articulate-5466968447-dhn5v   1/1     Running   0          73m
 articulate-5466968447-lq9th   1/1     Running   0          70m
 ```
+
 4. Open your browser and point to the application at `http://EXTERNAL-IP:PORT`
 5. Navigate to `Service & HA` tab and click the `Kill` button
 6. Notice one of the pods exits and is immediately brought back online
@@ -155,6 +162,7 @@ articulate-5466968447-lq9th   1/1     Running   0          70m
 articulate-5466968447-5hjbp   0/1     Completed   0          74m
 articulate-5466968447-5hjbp   1/1     Running     1          74m
 ```
+
 ---
 
 ## Clean up the deployment
