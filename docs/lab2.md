@@ -8,7 +8,7 @@
 ## Excercise
 
 ## Scale your application
-1. Create the deployment
+* Create the deployment
 
 ```
 kubectl create deployment articulate --image=berinle/articulate:02a18f91
@@ -17,7 +17,7 @@ kubectl create deployment articulate --image=berinle/articulate:02a18f91
 deployment.apps/articulate created
 ```
 
-2. Get the objects created as part of the deployment
+* Get the objects created as part of the deployment
 
 ```
 kubectl get all
@@ -35,7 +35,7 @@ replicaset.apps/articulate-5466968447   1         1         1       19s
 
 Notice a pod was automatically created as part of the deployment. Also notice there is a `ReplicaSet` associated with the deployment. This will be used to scale up/down the deployment as instructed.
 
-2. Scale to 3 copies of your application
+* Scale to 3 copies of your application
 
 ```
 kubectl scale deployments/articulate --replicas=3
@@ -44,7 +44,7 @@ kubectl scale deployments/articulate --replicas=3
 deployment.apps/articulate scaled
 ```
 
-3. Check the deployment rollout of the scale out
+* Check the deployment rollout of the scale out
 
 ```
 kubectl rollout status deployments/articulate
@@ -56,7 +56,7 @@ deployment "articulate" successfully rolled out
 ​
 ```
 
-4. Get the deployment
+* Get the deployment
 
 ```
 kubectl get deployments/articulate
@@ -66,7 +66,7 @@ NAME         READY   UP-TO-DATE   AVAILABLE   AGE
 articulate   3/3     3            3           5m17s
 ```
 
-5. Verify there are 3 pods now up and running
+* Verify there are 3 pods now up and running
 
 ```
 kubectl get pods -l app=articulate
@@ -83,7 +83,7 @@ articulate-5466968447-lq9th   1/1     Running   0          3m49sm
 
 ## View application logs
 
-1. Check the logs of one of the pods from the previous steps
+* Check the logs of one of the pods from the previous steps
 
 ```
 kubectl logs pods/articulate-5466968447-5hjbp
@@ -117,9 +117,9 @@ Calculated JVM Memory Configuration: -XX:MaxDirectMemorySize=10M -XX:MaxMetaspac
 
 ## High Availablity
 
-With 3 copies of the app running, lets trigger a failure on one of them and watch it self heal
+With 3 copies of the app running, lets trigger a failure on one of them and watch it recovery
 
-1. First expose the service so we can 
+* First expose the service so we can 
 
 ```
 kubectl expose deployment/articulate --type=NodePort --name=articulate --port=8080
@@ -128,7 +128,7 @@ kubectl expose deployment/articulate --type=NodePort --name=articulate --port=80
 service/articulate exposed
 ```
 
-2. Get the dynamically assigned port by listing the service
+* Get the dynamically assigned port by listing the service
 
 ```
 kubectl get service/articulate
@@ -138,7 +138,7 @@ NAME         TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
 articulate   NodePort   10.100.200.110   <none>        8080:32068/TCP   4s
 ```
 
-3. In a terminal window, watch the pods
+* In a terminal window, watch the pods
 
 ```
 kubectl get po -w -l app=articulate
@@ -150,9 +150,9 @@ articulate-5466968447-dhn5v   1/1     Running   0          73m
 articulate-5466968447-lq9th   1/1     Running   0          70m
 ```
 
-4. Open your browser and point to the application at `http://EXTERNAL-IP:PORT`
-5. Navigate to `Service & HA` tab and click the `Kill` button
-6. Notice one of the pods exits and is immediately brought back online
+* Open your browser and point to the application at `http://EXTERNAL-IP:PORT`
+* Navigate to `Service & HA` tab and click the `Kill` button
+* Notice one of the pods exits and is immediately brought back online
 
 ```
 NAME                          READY   STATUS    RESTARTS   AGE
