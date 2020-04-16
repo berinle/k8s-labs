@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: articulate
+    color: blue
+    version: v1
+  name: articulate
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: articulate
+  template:
+    metadata:
+      labels:
+        app: articulate
+    spec:
+      containers:
+      - image: berinle/articulate:ff2859d8
+        name: articulate
+        resources:
+          requests:
+            memory: "1024Mi"
+            cpu: "250m"

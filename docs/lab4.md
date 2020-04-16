@@ -7,7 +7,7 @@
 * Deploy v1 of your application
 
 ```
-kubectl apply -f xxx
+kubectl apply -f https://raw.githubusercontent.com/berinle/k8s-labs/master/bg/blue-deploy.yaml
 
 -- out --
 deployment.apps/articulate created
@@ -26,7 +26,7 @@ articulate   1/1     1            1           2m46s
 * Create a service object to expose the deployment
 
 ```
-kubectl apply -f bg/svc.yaml
+kubectl apply -f https://raw.githubusercontent.com/berinle/k8s-labs/master/bg/svc.yaml
 
 -- out --
 service/articulate created
@@ -57,7 +57,7 @@ Forwarding from [::1]:6060 -> 8080
 * Deploy v2 of your application
 
 ```
-kubectl apply -f bg/green-deploy.yaml
+kubectl apply -f https://raw.githubusercontent.com/berinle/k8s-labs/master/bg/green-deploy.yaml
 
 -- out --
 deployment.apps/articulate-g created
