@@ -2,7 +2,7 @@
 Below are lab exercises to give your a practical hands-on on contents covered in the workshop.
 
 ## Requirements
-* A running kubernetes cluster. You could also use [minikube](https://minikube.sigs.k8s.io/docs/start/)
+* A running kubernetes cluster. You could also use [minikube](https://minikube.sigs.k8s.io/docs/start/), [kind](https://kind.sigs.k8s.io/docs/user/quick-start/), or [katacoda](https://www.katacoda.com/)
 * [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl)
 
 ---
